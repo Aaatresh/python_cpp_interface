@@ -163,7 +163,8 @@ def match_images(arg1, arg2):
     mkpts1 = mkpts1.tolist()
     # print("finished python")
     # print(f"{fm0_size}")
-    return [[1, 2], [3, 4]]
+    # return [[1, 2], [3, 4]]
+    
 
 if __name__ == "__main__":
     match_images(1, 2)

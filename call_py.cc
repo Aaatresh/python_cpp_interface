@@ -63,8 +63,16 @@ int call_py(const char *fileName, const char *funcName, cv::Mat img1, cv::Mat im
             // std::cout << "Ready to call function\n";
             pValue = PyObject_CallObject(pFunc, pArgs);
 
-            double val1 = PyFloat_AsDouble(PyList_GetItem(pValue, 0));
-            double val2 = PyFloat_AsDouble(PyList_GetItem(pValue, 1));
+            output_array = PyList_GetItem(pValue, 0);
+            double val1 = PyFloat_AsDouble(PyList_GetItem(output_array, 0));
+            double val2 = PyFloat_AsDouble(PyList_GetItem(output_array, 1));
+
+            std::cout << "value1 : " << val1 << "\n";
+            std::cout << "value2 : " << val2 << "\n";
+
+            output_array = PyList_GetItem(pValue, 1);
+            val1 = PyFloat_AsDouble(PyList_GetItem(output_array, 0));
+            val2 = PyFloat_AsDouble(PyList_GetItem(output_array, 1));
 
             std::cout << "value1 : " << val1 << "\n";
             std::cout << "value2 : " << val2 << "\n";
@@ -106,6 +114,7 @@ int main()
     cv::Mat img1 = cv::imread("image1.jpg", cv::IMREAD_GRAYSCALE);
     cv::Mat img2 = cv::imread("image2.jpg", cv::IMREAD_GRAYSCALE);
 
+    call_py("SLAM_Matcher", "match_images", img1, img2);
     call_py("SLAM_Matcher", "match_images", img1, img2);
 
     // for(int i = 0; i < 10; i++)
