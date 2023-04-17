@@ -145,25 +145,33 @@ def match_images(arg1, arg2):
 
     fm0 = batch['feat_0_matches'].cpu().numpy()
     fm1 = batch['feat_1_matches'].cpu().numpy()
-    fm0_size = fm0.shape
-    fm1_size = fm1.shape
-    mkpts0_size = mkpts0.shape
-    mkpts1_size = mkpts1.shape
-    fm0 = fm0.flatten()
-    fm1 = fm1.flatten()
-    mkpts0 = mkpts0.flatten()
-    mkpts1 = mkpts1.flatten()
-    fm0 = np.insert(fm0, 0, fm0_size[0])
-    fm1 = np.insert(fm1, 0, fm1_size[0])
-    mkpts0 = np.insert(mkpts0, 0, mkpts0_size[0])
-    mkpts1 = np.insert(mkpts1, 0, mkpts1_size[0])
+
+    # fm0_size = fm0.shape
+    # fm1_size = fm1.shape
+    # mkpts0_size = mkpts0.shape
+    # mkpts1_size = mkpts1.shape
+    # fm0 = fm0.flatten()
+    # fm1 = fm1.flatten()
+    # mkpts0 = mkpts0.flatten()
+    # mkpts1 = mkpts1.flatten()
+    # fm0 = np.insert(fm0, 0, fm0_size[0])
+    # fm1 = np.insert(fm1, 0, fm1_size[0])
+    # mkpts0 = np.insert(mkpts0, 0, mkpts0_size[0])
+    # mkpts1 = np.insert(mkpts1, 0, mkpts1_size[0])
+
     fm0 = fm0.tolist()
     fm1 = fm1.tolist()
     mkpts0 = mkpts0.tolist()
     mkpts1 = mkpts1.tolist()
+
+    print(mkpts0)
+    # print(len(mkpts0))
     # print("finished python")
     # print(f"{fm0_size}")
     # return [[1, 2], [3, 4]]
+
+    return [len(mkpts0), mkpts0, mkpts1, fm0, fm1]
+    # return [3, [[100, 200.12], [300.19, 400], [500, 4.99]]]
     
 
 if __name__ == "__main__":
