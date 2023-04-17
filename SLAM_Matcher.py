@@ -57,8 +57,10 @@ def match_images(arg1, arg2):
     # print("===========\n")
 
 
-    img0_raw = cv2.resize(arg1, (672, 376))
-    img1_raw = cv2.resize(arg2, (672, 376))
+    # img0_raw = cv2.resize(arg1, (672, 376))
+    # img1_raw = cv2.resize(arg2, (672, 376))
+    img0_raw = arg1
+    img1_raw = arg2
 
 
     matcher.load_state_dict(torch.load("weights/outdoor_ds.ckpt")['state_dict'])
@@ -77,10 +79,10 @@ def match_images(arg1, arg2):
     img1_raw = cv2.resize(img1_raw, (img1_raw.shape[1]//8*8, img1_raw.shape[0]//8*8))
 
 
-    img0 = torch.from_numpy(img0_raw)[None][None]
-    img1 = torch.from_numpy(img1_raw)[None][None]
-    img0 = img0.float()
-    img1 = img1.float()
+    img0 = torch.from_numpy(img0_raw)[None][None] / 255.
+    img1 = torch.from_numpy(img1_raw)[None][None] / 255.
+    # img0 = img0.float()
+    # img1 = img1.float()
 
     """ Display both images: """
     if(0):
@@ -164,15 +166,20 @@ def match_images(arg1, arg2):
     mkpts0 = mkpts0.tolist()
     mkpts1 = mkpts1.tolist()
 
-    print(mkpts0)
+    # print(mkpts0)
     # print(len(mkpts0))
     # print("finished python")
     # print(f"{fm0_size}")
     # return [[1, 2], [3, 4]]
 
-    return [len(mkpts0), mkpts0, mkpts1, fm0, fm1]
+    return 1
+    # return [len(mkpts0), mkpts0, mkpts1, fm0, fm1]
     # return [3, [[100, 200.12], [300.19, 400], [500, 4.99]]]
     
 
 if __name__ == "__main__":
-    match_images(1, 2)
+
+    img1 = cv2.imread("loftr/images_left/frame0000.jpg", 0)
+    img2 = cv2.imread("loftr/images_right/frame0000.jpg", 0)
+
+    match_images(img1, img2)
